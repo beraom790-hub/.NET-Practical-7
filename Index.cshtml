@@ -1,0 +1,285 @@
+﻿@model Practical_7.Models.Feedback
+
+@{
+    ViewData["Title"] = "Give Feedback";
+}
+
+<style>
+
+    .feedback-wrapper {
+        max-width: 1050px;
+        margin: 35px auto;
+        display: grid;
+        grid-template-columns: 0.85fr 1.15fr;
+        background: white;
+        border-radius: 22px;
+        overflow: hidden;
+        box-shadow: 0 15px 45px rgba(0,0,0,0.10);
+    }
+
+    /* LEFT SIDE */
+
+    .feedback-info {
+        background: linear-gradient(145deg, #1d4ed8, #2563eb, #4f46e5);
+        color: white;
+        padding: 50px 40px;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .feedback-info::before {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            right: -80px;
+            top: -70px;
+        }
+
+        .feedback-info::after {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.07);
+            left: -80px;
+            bottom: -70px;
+        }
+
+    .info-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .info-icon {
+        font-size: 50px;
+        margin-bottom: 20px;
+    }
+
+    .feedback-info h1 {
+        font-size: 38px;
+        line-height: 1.2;
+        margin-bottom: 18px;
+    }
+
+    .feedback-info p {
+        color: #dbeafe;
+        line-height: 1.7;
+        font-size: 16px;
+    }
+
+    .info-list {
+        list-style: none;
+        padding: 0;
+        margin-top: 35px;
+    }
+
+        .info-list li {
+            margin: 18px 0;
+            font-size: 15px;
+            color: #eff6ff;
+        }
+
+    /* RIGHT SIDE */
+
+    .feedback-form-area {
+        padding: 45px;
+    }
+
+    .form-heading {
+        margin-bottom: 30px;
+    }
+
+        .form-heading h2 {
+            margin: 0 0 7px;
+            color: #172554;
+            font-size: 28px;
+        }
+
+        .form-heading p {
+            color: #64748b;
+            margin: 0;
+        }
+
+    .form-group {
+        margin-bottom: 21px;
+    }
+
+        .form-group label {
+            display: block;
+            color: #334155;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+    .form-control {
+        width: 100%;
+        padding: 13px 15px;
+        border: 1px solid #d1d5db;
+        border-radius: 9px;
+        box-sizing: border-box;
+        font-size: 15px;
+        background: #f8fafc;
+        transition: 0.25s;
+    }
+
+        .form-control:focus {
+            border-color: #2563eb;
+            background: white;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+        }
+
+    .error-message {
+        display: block;
+        color: #dc2626;
+        font-size: 13px;
+        margin-top: 5px;
+    }
+
+    .submit-button {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 9px;
+        background: linear-gradient(90deg, #2563eb, #4f46e5);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 5px;
+    }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37,99,235,0.25);
+        }
+
+    .success-message {
+        background: #ecfdf5;
+        color: #047857;
+        border: 1px solid #a7f3d0;
+        padding: 13px 15px;
+        border-radius: 9px;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    .rating-note {
+        font-size: 12px;
+        color: #64748b;
+        margin-top: 5px;
+    }
+
+    @@media (max-width: 850px) {
+
+        .feedback-wrapper {
+            grid-template-columns: 1fr;
+            margin: 20px;
+        }
+
+        .feedback-info {
+            padding: 35px;
+        }
+
+        .feedback-form-area {
+            padding: 30px;
+        }
+    }
+
+</style>
+
+
+<div class="feedback-wrapper">
+
+    <!-- LEFT INFORMATION PANEL -->
+
+    <div class="feedback-info">
+
+        <div class="info-content">
+
+            <div class="info-icon">
+                💙
+            </div>
+
+            <h1>
+                We Value<br />
+                Your Opinion
+            </h1>
+
+            <p>
+                Your feedback helps us understand what we're doing well
+                and where we can improve.
+            </p>
+
+            <ul class="info-list">
+
+                <li>
+                    ✓ Quick and simple feedback
+                </li>
+
+                <li>
+                    ✓ Rate your experience
+                </li>
+
+                <li>
+                    ✓ Share your honest opinion
+                </li>
+
+                <li>
+                    ✓ Help us improve our services
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <!-- FORM -->
+
+    <div class="feedback-form-area">
+
+        <div class="form-heading">
+
+            <h2>Share Your Feedback</h2>
+
+            <p>
+                Fill in the details below.
+            </p>
+
+        </div>
+
+
+        @if (TempData["Message"] != null)
+        {
+            <div class="success-message">
+                ✓ @TempData["Message"]
+            </div>
+        }
+
+
+        @using (Html.BeginForm("Index", "Feedback", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <!-- Partial View -->
+            @Html.Partial("_FeedbackForm", Model)
+
+            <button type="submit"
+                    class="submit-button">
+
+                Submit Feedback &nbsp; →
+
+            </button>
+        }
+
+    </div>
+
+</div>

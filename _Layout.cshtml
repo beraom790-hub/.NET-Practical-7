@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - Feedback Management</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            color: #333;
+        }
+
+        /* HEADER */
+
+        header {
+            background: #2563eb;
+            color: white;
+            padding: 18px 50px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 16px;
+        }
+
+            .nav-links a:hover {
+                text-decoration: underline;
+            }
+
+        /* MAIN CONTENT */
+
+        main {
+            min-height: 75vh;
+            padding: 20px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            margin-top: 30px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Layout Header -->
+
+    <header>
+
+        <div class="navbar">
+
+            <div class="logo">
+                Feedback Management System
+            </div>
+
+            <div class="nav-links">
+
+                <a asp-controller="Home"
+                   asp-action="Index">
+                    Home
+                </a>
+
+                <a asp-controller="Feedback"
+                   asp-action="Index">
+                    Feedback
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- Page Content -->
+
+    <main>
+
+        @RenderBody()
+
+    </main>
+
+
+    <!-- Layout Footer -->
+
+    <footer>
+
+        <p>
+            © 2026 Feedback Management System
+        </p>
+
+    </footer>
+
+
+    @await RenderSectionAsync(
+    "Scripts",
+        required: false
+        )
+
+</body>
+
+</html>
